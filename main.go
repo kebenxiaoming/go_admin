@@ -1,9 +1,9 @@
 package main
 
 import (
-	_ "hello/service"
-	_ "hello/models"
-	_ "hello/routers"
+	_ "go_admin/service"
+	_ "go_admin/models"
+	_ "go_admin/routers"
 	"github.com/astaxie/beego"
 )
 

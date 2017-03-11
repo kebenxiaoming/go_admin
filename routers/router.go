@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"hello/controllers/admin"
+	"go_admin/controllers/admin"
 	"github.com/astaxie/beego"
 )
 

@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"hello/models"
+	"go_admin/models"
 )
 type MainController struct {
 	beego.Controller
