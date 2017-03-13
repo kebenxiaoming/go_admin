@@ -1,11 +1,10 @@
 package controllers
 
 import (
-	"github.com/astaxie/beego"
 	//"go_admin/models"
 )
 type IndexController struct {
-	beego.Controller
+	BaseController
 }
 
 type User_info struct{

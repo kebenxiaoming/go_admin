@@ -24,3 +24,11 @@ func init(){
 	// 需要在init中注册定义的model
 	orm.RegisterModelWithPrefix(beego.AppConfig.String("mysqldbprefix"), new(UserGroup))
 }
+
+func (usergroup *UserGroup)GetUserGroupById(id int) (UserGroup,error){
+	o := orm.NewOrm()
+	o.Using("default")
+	// read
+	err := o.Read(usergroup)
+	return *usergroup,err
+}

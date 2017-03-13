@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title>go_admin登录</title>
 
     <script src="/static/admin/js/jquery-1.8.1.min.js" ></script>
     <script src="/static/admin/js/other.js" ></script>

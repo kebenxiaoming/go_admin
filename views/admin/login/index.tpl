@@ -12,8 +12,8 @@
                     <td height="61" colspan="2" valign="top"><input type="password" name="password" id="textfield2" value = "{{.password}}" placeholder="Password" class="login2_nr_sr"></td>
                 </tr>
                 <tr>
-                    <td width="177" height="53" valign="top"><input type="text" name="verify_code" id="textfield" placeholder="输入验证码" class="login2_nr_yz"></td>
-                    <td width="240" valign="top"><a href="#"><img title="验证码" id="verify_code" src="#" style="vertical-align:top"></a><span style="color:red;font-size:10px;">{{.err}}</span></td>
+                    <td width="177" height="53" valign="top"><input type="text" name="captcha" id="textfield" placeholder="输入验证码" class="login2_nr_yz"></td>
+                    <td width="240" valign="top">{{create_captcha}}<a href="#"></a><span style="color:red;font-size:10px;">{{.err}}</span></td>
                 </tr>
                 <tr>
                     <td height="58" valign="top"><input type="checkbox" name="remember" value="remember-me" id="checkbox"  class="login2_nr_xz"></td>
