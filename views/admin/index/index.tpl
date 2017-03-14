@@ -31,7 +31,7 @@
   </tr>
   <tr>
     <td height="60" align="center">{{.user_info.User_name}}</td>
-    <td align="center">{{.user_info.Real_name}}}</td>
+    <td align="center">{{.user_info.Real_name}}</td>
     <td align="center">{{.user_info.Mobile}}</td>
     <td align="center">{{.user_info.Email}}</td>
     <td align="center">{{.user_info.Login_time}}</td>

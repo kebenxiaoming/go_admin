@@ -16,9 +16,9 @@
 								{{end}}
 								{{range $menu_k,$menu_list:=$module.MenuList}}
 								{{if eq  $.content_header.Menu_id $menu_list.Menu_id}}
-								<li style="background-color:#412a54"><a href="{{$menu_list.Menu_url}}">{{$menu_list.Menu_name}}</a></li>
+								<li style="background-color:#412a54"><a href="{{url $menu_list.Menu_url}}">{{$menu_list.Menu_name}}</a></li>
 								{{else}}
-								<li><a href="{{$menu_list.Menu_url}}">{{$menu_list.Menu_name}}</a></li>
+								<li><a href="{{url $menu_list.Menu_url}}">{{$menu_list.Menu_name}}</a></li>
 								{{end}}
 								{{end}}
 							</ul>
