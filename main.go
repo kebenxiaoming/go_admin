@@ -15,11 +15,17 @@ func init(){
 			ctx.Redirect(302, "/admin/login")
 		}
 	}
-	
+
 	beego.InsertFilter("/*",beego.BeforeRouter,FilterUser)
 }
 
+func url(in string)(out string){
+	out = "/admin/"+in
+	return out
+}
+
 func main() {
+	beego.AddFuncMap("url",url)
 	beego.Run()
 }
 

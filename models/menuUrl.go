@@ -55,7 +55,7 @@ func (menuurl *MenuUrl)GetTrees() []AllMenuUrl{
 	module:=&Module{}
 	result,err:=module.GetAllModules(1)
 	//获取当前用户的菜单
-	var access=[]int{1,5,108,112,113,122,109,114,115,123}
+	var access=[]int{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,117,125}
 	newAllMenuUrl:=make([]AllMenuUrl,0)
 	if err==nil {
 		for _, v := range result {
