@@ -5,15 +5,7 @@
 <!--&lt;!&ndash;- START 以上内容不需更改，保证该TPL页内的标签匹配即可 -&ndash;&gt;-->
 
 {{template "admin/public/message.tpl" .}}
-{{if eq .user_info.User_type 0}}
-  <table width="855" border="0" cellspacing="0" cellpadding="0" class="right_nr_sy_bt">
-    <tr>
-      <td width="21"><img src="/static/admin/images/sy_06.jpg" width="4" height="18" /></td>
-      <td width="834">快捷菜单</td>
-    </tr>
-  </table>
-  <div class="right_nr_kj_cd"><a href="/admin/user/index">账号列表</a></div>
-{{end}}
+
 <table width="855" border="0" cellspacing="0" cellpadding="0" class="right_nr_sy_bt">
   <tr>
     <td width="21"><img src="/static/admin/images/sy_06.jpg" width="4" height="18" /></td>
@@ -35,7 +27,7 @@
     <td align="center">{{.user_info.Mobile}}</td>
     <td align="center">{{.user_info.Email}}</td>
     <td align="center">{{.user_info.Login_time}}</td>
-    <td align="center">{{.user_info.Login_ip}}{{.hehe}}</td>
+    <td align="center">{{.user_info.Login_ip}}</td>
   </tr>
 </table>
 </div>

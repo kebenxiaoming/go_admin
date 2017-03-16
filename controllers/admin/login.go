@@ -35,12 +35,12 @@ func (c *LoginController) Post() {
 			c.TplName = "admin/login/index.tpl"
 		} else {
 			u := &models.User{User_name:username}
-			if u.Login(username,password) {
-				c.SetSession("sunny_user_uid", u.User_id)
-				c.SetSession("sunny_user_group",u.User_group)
+			ok,user:=u.Login(username,password)
+			if ok {
+				c.SetSession("sunny_user", user)
 				//在这里查出对应的权限的内容
-				userGroup:=&models.UserGroup{}
-				ug,err:=userGroup.GetUserGroupById(u.User_group)
+				userGroup:=&models.UserGroup{Group_id:user.User_group}
+				ug,err:=userGroup.GetUserGroupById()
 				if(err==nil){
 					c.SetSession("sunny_user_role",ug.Group_role)
 				}

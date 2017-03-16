@@ -6,13 +6,14 @@ import (
 	_ "go_admin/routers"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
+	"go_admin/models"
 )
 
 func init(){
 	var FilterUser = func(ctx *context.Context) {
-		_, ok := ctx.Input.Session("sunny_user_uid").(int)
-		if !ok && ctx.Request.RequestURI != "/admin/login" {
-			ctx.Redirect(302, "/admin/login")
+		_, ok := ctx.Input.Session("sunny_user").(models.User)
+		if !ok && ctx.Request.RequestURI != "/admin/Login" {
+			ctx.Redirect(302, "/admin/Login")
 		}
 	}
 

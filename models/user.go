@@ -37,24 +37,24 @@ func init(){
 	orm.RegisterModelWithPrefix(beego.AppConfig.String("mysqldbprefix"), new(User))
 }
 
-func (user *User) Login(username string,password string) (bool){
+func (user *User) Login(username string,password string) (bool,User){
 	o := orm.NewOrm()
 	o.Using("default")
 	// read
 	err := o.Read(user,"User_name")
 	if err!=nil{
-		return false
+		return false,*user
 	}else{
 		m := md5.New()
 		io.WriteString(m, password)
 		keyMd5 := hex.EncodeToString(m.Sum(nil))
 		if user.Password!=keyMd5{
-			return false
+			return false,*user
 		}else{
-			return true
+			return true,*user
 		}
 	}
-	return false
+	return false,*user
 }
 
 func (user *User) GetUserById() (User){

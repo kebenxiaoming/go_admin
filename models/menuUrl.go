@@ -10,6 +10,8 @@ package models
 import (
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego"
+	"strings"
+	"strconv"
 )
 
 type MenuUrl struct{
@@ -50,21 +52,30 @@ func (menuurl *MenuUrl) GetMenuUrlById() (MenuUrl,error){
 	return *menuurl,err
 }
 
-func (menuurl *MenuUrl)GetTrees() []AllMenuUrl{
+func (menuurl *MenuUrl) GetMenuUrlByUrl() (MenuUrl,error){
+	o := orm.NewOrm()
+	o.Using("default")
+	// read
+	err := o.Read(menuurl,"Menu_url")
+
+	return *menuurl,err
+}
+
+func (menuUrl *MenuUrl)GetTrees(oldAccess string) []AllMenuUrl{
 	//获取所有module的菜单
 	module:=&Module{}
 	result,err:=module.GetAllModules(1)
-	//获取当前用户的菜单
-	var access=[]int{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,117,125}
 	newAllMenuUrl:=make([]AllMenuUrl,0)
+	access:=strings.Split(oldAccess,",")
 	if err==nil {
 		for _, v := range result {
-			newresult, newerr := getListByModuleId(v.Module_id, "demo")
-			if (newerr == nil) {
+			newResult, newErr := getListByModuleId(v.Module_id, "demo")
+			if (newErr == nil) {
 				newMenus:=make([]MenuUrl,0)
-				for _,mv:=range newresult {
-					for _, v := range access {
-						if (mv.Menu_id==v) {
+				for _,mv:=range newResult {
+					for _, newV := range access {
+						iv,_:=strconv.Atoi(newV)
+						if (mv.Menu_id==iv) {
 							newMenus=append(newMenus,mv)
 							break
 						}else{

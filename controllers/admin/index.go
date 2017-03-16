@@ -3,6 +3,8 @@ package controllers
 import (
 	//"go_admin/models"
 )
+import "go_admin/models"
+
 type IndexController struct {
 	BaseController
 }
@@ -22,7 +24,13 @@ func (c *IndexController) Get() {
 	//c.Data["ss"]=c.GetSession("uid")
 	//menuurl:=&models.MenuUrl{Menu_id:2}
 	//result,err:=menuurl.GetMenuUrlById()
-	user_info:=&User_info{1,2,"sunny","hehe","15866863307","xiaoyao_xiao@126.com",14567864321,"192.168.0.1"}
-	c.Data["user_info"]=user_info
+}
+
+func (c *IndexController)Index(){
+	userInfo:=c.GetSession("sunny_user")
+	if(userInfo!=nil){
+		user_info:=userInfo.(models.User)
+		c.Data["user_info"]=user_info
+	}
 	c.TplName = "admin/index/index.tpl"
 }

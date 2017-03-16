@@ -10,6 +10,7 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"go_admin/models"
+	"strings"
 )
 
 type BaseController struct {
@@ -22,9 +23,28 @@ type ContentHeader struct{
 }
 //初始化整个的权限和目录
 func (c *BaseController)Prepare(){
-	menu:=&models.MenuUrl{}
-	result:=menu.GetTrees()
-	c.Data["sidebar"] = result
-	c.Data["content_header"]=models.MenuUrl{21,"hehe","Index/index",1,1,1,1,1,"asdf",0}
-	c.Data["current_module_id"]=1
+	oldAccess:=c.GetSession("sunny_user_role")
+	if(oldAccess!=nil){
+		menu:=&models.MenuUrl{}
+		access:=oldAccess.(string)
+		result := menu.GetTrees(access)
+		c.Data["sidebar"] = result
+	}
+	//获取当前的路由
+	oldController,action:=c.GetControllerAndAction()
+	if action==""{
+		action="index"
+	}
+	//替换Controller
+	controller:=strings.Replace(oldController,"Controller","",-1)
+	nowUrl:=controller+"/"+strings.ToLower(action)
+	//根据url获取对应的当前菜单
+	if nowUrl!="" {
+		urlMenu := &models.MenuUrl{Menu_url:nowUrl}
+		nowMenu,err:=urlMenu.GetMenuUrlByUrl()
+		if err==nil{
+			c.Data["content_header"]=nowMenu
+			c.Data["current_module_id"]=nowMenu.Module_id
+		}
+	}
 }

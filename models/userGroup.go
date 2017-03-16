@@ -25,7 +25,7 @@ func init(){
 	orm.RegisterModelWithPrefix(beego.AppConfig.String("mysqldbprefix"), new(UserGroup))
 }
 
-func (usergroup *UserGroup)GetUserGroupById(id int) (UserGroup,error){
+func (usergroup *UserGroup)GetUserGroupById() (UserGroup,error){
 	o := orm.NewOrm()
 	o.Using("default")
 	// read
