@@ -18,5 +18,5 @@ $ go get github.com/beego/bee
 bee run go_admin
 ```
 ## 五、浏览器打开</br>
-http://localhost:8080
+http://localhost:8080</br>
 以上
