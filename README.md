@@ -15,7 +15,7 @@ $ go get github.com/beego/bee
 ## 三、导入sql文件到数据库，修改配置文件为当前数据库(略)
 ## 四、将项目导入到对应的beego项目目录，使用命令行</br>
 ```
-bee gun go_admin
+bee run go_admin
 ```
 ## 五、浏览器打开</br>
 http://localhost:8080
