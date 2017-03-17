@@ -23,6 +23,12 @@ type ContentHeader struct{
 }
 //初始化整个的权限和目录
 func (c *BaseController)Prepare(){
+	//赋值用户信息
+	userInfo:=c.GetSession("sunny_user")
+	if(userInfo!=nil){
+		user_info:=userInfo.(models.User)
+		c.Data["user_info"]=user_info
+	}
 	oldAccess:=c.GetSession("sunny_user_role")
 	if(oldAccess!=nil){
 		menu:=&models.MenuUrl{}

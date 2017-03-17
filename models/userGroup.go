@@ -32,3 +32,12 @@ func (usergroup *UserGroup)GetUserGroupById() (UserGroup,error){
 	err := o.Read(usergroup)
 	return *usergroup,err
 }
+
+func (userGroup *UserGroup)GetALLGroups() ([]UserGroup,error){
+	o := orm.NewOrm()
+	o.Using("default")
+	var groups []UserGroup
+	_,err:= o.Raw("SELECT * FROM "+beego.AppConfig.String("mysqldbprefix")+"user_group  ORDER BY group_id ASC").QueryRows(&groups)
+	//未查询到数据或者查询出错
+	return groups,err
+}

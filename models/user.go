@@ -57,16 +57,29 @@ func (user *User) Login(username string,password string) (bool,User){
 	return false,*user
 }
 
-func (user *User) GetUserById() (User){
+func (user *User)GetAllUsers()([]User,error){
+	o := orm.NewOrm()
+	o.Using("default")
+	var users []User
+	_,err:= o.Raw("SELECT * FROM "+beego.AppConfig.String("mysqldbprefix")+"user  WHERE status = 1").QueryRows(&users)
+	//未查询到数据或者查询出错
+	return users,err
+}
+
+func (user *User) GetUserById() (User,error){
 	o := orm.NewOrm()
 	o.Using("default")
 	// read
 	err := o.Read(user)
-	if err!=nil{
-		return *user
-	}else{
-		return *user
-	}
+	return *user,err
+}
+
+func (user *User) UpdateUser() (User,error){
+	o := orm.NewOrm()
+	o.Using("default")
+	// read
+	_,err := o.Update(user)
+	return *user,err
 }
 
 
