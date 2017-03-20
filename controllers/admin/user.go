@@ -2,6 +2,9 @@ package controllers
 
 import (
 	"go_admin/models"
+	"crypto/md5"
+	"io"
+	"encoding/hex"
 )
 
 type UserController struct {
@@ -88,18 +91,22 @@ func (c *UserController)Edit(){
 				c.TplName = "admin/public/redirect.tpl"
 				return
 			}
+			myUser.User_id=user_id
+			myUser.User_name=username
+			myUser.User_desc=user_desc
+			myUser.User_group=user_group
 			if password != "" {
-				myUser.User_id=user_id
-				myUser.User_name=username
-				myUser.User_desc=user_desc
-				myUser.User_group=user_group
-				myUser.Password=password
-				myUser.Real_name=real_name
-				myUser.Email=email
-				myUser.Mobile=mobile
-				myUser.User_group=user_group
-				userInfo := &myUser
-				refreshUser, err := userInfo.UpdateUser()
+				m := md5.New()
+				io.WriteString(m, password)
+				keyMd5 := hex.EncodeToString(m.Sum(nil))
+				myUser.Password = keyMd5
+			}
+			myUser.Real_name=real_name
+			myUser.Email=email
+			myUser.Mobile=mobile
+			myUser.User_group=user_group
+			userInfo := &myUser
+			refreshUser, err := userInfo.UpdateUser()
 				if err == nil {
 					//如果是当前用户更新Session
 					if user_info.User_id==myUser.User_id {
@@ -118,36 +125,6 @@ func (c *UserController)Edit(){
 					c.TplName = "admin/public/redirect.tpl"
 				}
 				return
-			} else {
-				myUser.User_id=user_id
-				myUser.User_name=username
-				myUser.User_desc=user_desc
-				myUser.User_group=user_group
-				myUser.Real_name=real_name
-				myUser.Email=email
-				myUser.Mobile=mobile
-				myUser.User_group=user_group
-				userInfo := &myUser
-				refreshUser, err := userInfo.UpdateUser()
-				if err == nil {
-					//如果是当前用户更新Session
-					if user_info.User_id==myUser.User_id {
-						c.SetSession("sunny_user", refreshUser)
-					}
-					c.Data["code"] = 1
-					c.Data["msg"] = "修改成功！"
-					c.Data["url"] = "/admin/Index"
-					c.Data["wait"] = 1
-					c.TplName = "admin/public/redirect.tpl"
-				} else {
-					c.Data["code"] = 0
-					c.Data["msg"] = "修改失败！"
-					c.Data["url"] = "/admin/User/edit/uid/" + uid
-					c.Data["wait"] = 3
-					c.TplName = "admin/public/redirect.tpl"
-				}
-				return
-				}
 			}else{
 			c.Data["code"] = 0
 			c.Data["msg"] = "未获取到用户信息！"

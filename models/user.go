@@ -13,6 +13,8 @@ import (
 	"crypto/md5"
 	"io"
 	"encoding/hex"
+	"time"
+	"strconv"
 )
 
 type User struct{
@@ -51,6 +53,12 @@ func (user *User) Login(username string,password string) (bool,User){
 		if user.Password!=keyMd5{
 			return false,*user
 		}else{
+			//登陆成功更新登录信息
+			user.Login_time,_= strconv.Atoi(strconv.FormatInt(time.Now().Unix(),10))
+			_,err := o.Update(user)
+			if err!=nil{
+				return false,*user
+			}
 			return true,*user
 		}
 	}
