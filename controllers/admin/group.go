@@ -12,7 +12,7 @@ import "go_admin/models"
 type GroupController struct {
 	BaseController
 }
-
+//群组列表
 func (c *GroupController)Index(){
 	user:=&models.UserGroup{}
 	groups,err:=user.GetALLGroups()

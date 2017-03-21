@@ -22,8 +22,8 @@ func (c *UserController)Profile(){
 //用户信息列表
 func (c *UserController)Index(){
 	user:=&models.User{}
-	users,error:=user.GetAllUsers()
-	if error==nil{
+	users,err:=user.GetAllUsers()
+	if err==nil{
 		c.Data["user_infos"]=users
 		c.TplName = "admin/user/index.tpl"
 		return

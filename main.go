@@ -8,7 +8,7 @@ import (
 	"github.com/astaxie/beego/context"
 	"go_admin/models"
 )
-
+//过滤器
 func init(){
 	var FilterUser = func(ctx *context.Context) {
 		_, ok := ctx.Input.Session("sunny_user").(models.User)
@@ -16,16 +16,16 @@ func init(){
 			ctx.Redirect(302, "/admin/Login")
 		}
 	}
-
 	beego.InsertFilter("/*",beego.BeforeRouter,FilterUser)
 }
-
+//模板中的自定义方法
 func url(in string)(out string){
 	out = "/admin/"+in
 	return out
 }
 
 func main() {
+	//自定义方法加入
 	beego.AddFuncMap("url",url)
 	beego.Run()
 }
