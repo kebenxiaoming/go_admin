@@ -112,7 +112,6 @@ func (c *UserController)Edit(){
 	}
 }
 //添加用户
-//编辑用户信息
 func (c *UserController)Add(){
 	group:=models.UserGroup{}
 	groups,err:=group.GetALLGroups()
