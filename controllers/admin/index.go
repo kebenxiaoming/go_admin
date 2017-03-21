@@ -15,13 +15,7 @@ type User_info struct{
 	Login_time int64
 	Login_ip string
 }
-
-func (c *IndexController) Get() {
-	//c.Data["ss"]=c.GetSession("uid")
-	//menuurl:=&models.MenuUrl{Menu_id:2}
-	//result,err:=menuurl.GetMenuUrlById()
-}
-
+//首页
 func (c *IndexController)Index(){
 	c.TplName = "admin/index/index.tpl"
 }

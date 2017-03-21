@@ -20,11 +20,11 @@ func init() {
 	cpt.StdHeight = 25
 }
 
-
+//登陆页
 func (c *LoginController) Get() {
 	c.TplName = "admin/login/index.tpl"
 }
-
+//登陆
 func (c *LoginController) Post() {
 	verify:= cpt.VerifyReq(c.Ctx.Request)
 	if verify {

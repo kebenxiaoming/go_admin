@@ -28,11 +28,7 @@ func (c *UserController)Index(){
 		c.TplName = "admin/user/index.tpl"
 		return
 	}else{
-		c.Data["code"]=0
-		c.Data["msg"] = "未获取到用户信息！"
-		c.Data["url"]="/admin/Index"
-		c.Data["wait"]=3
-		c.TplName = "admin/public/redirect.tpl"
+		c.redirect("/admin/Index","未获取到用户信息！",0,3)
 		return
 	}
 }
@@ -60,11 +56,7 @@ func (c *UserController)Edit(){
 			c.TplName = "admin/user/edit.tpl"
 			return
 		}else{
-			c.Data["code"]=0
-			c.Data["msg"] = "未获取到id！"
-			c.Data["url"]="/admin/Index"
-			c.Data["wait"]=3
-			c.TplName = "admin/public/redirect.tpl"
+			c.redirect("/admin/User/index","未获取到id！",0,3)
 			return
 		}
 	}else if currentMethod=="POST"{
@@ -84,11 +76,7 @@ func (c *UserController)Edit(){
 		if err==nil {
 			c.Data["group_id"]=myUser.User_group
 			if user_id == 1&&password != "" {
-				c.Data["code"] = 0
-				c.Data["msg"] = "初始管理员禁止修改密码！"
-				c.Data["url"] = "/admin/User/edit/uid/" + uid
-				c.Data["wait"] = 3
-				c.TplName = "admin/public/redirect.tpl"
+				c.redirect("/admin/User/edit/uid/" + uid,"初始管理员禁止修改密码！",0,3)
 				return
 			}
 			myUser.User_id=user_id
@@ -112,25 +100,13 @@ func (c *UserController)Edit(){
 					if user_info.User_id==myUser.User_id {
 						c.SetSession("sunny_user", refreshUser)
 					}
-					c.Data["code"] = 1
-					c.Data["msg"] = "修改成功！"
-					c.Data["url"] = "/admin/Index"
-					c.Data["wait"] = 1
-					c.TplName = "admin/public/redirect.tpl"
+					c.redirect("/admin/User/index","修改成功！",1,1)
 				} else {
-					c.Data["code"] = 0
-					c.Data["msg"] = "修改失败！"
-					c.Data["url"] = "/admin/User/edit/uid/" + uid
-					c.Data["wait"] = 3
-					c.TplName = "admin/public/redirect.tpl"
+					c.redirect("/admin/User/edit/uid/" + uid,"修改失败！",0,3)
 				}
 				return
 			}else{
-			c.Data["code"] = 0
-			c.Data["msg"] = "未获取到用户信息！"
-			c.Data["url"] = "/admin/User/edit/uid/" + uid
-			c.Data["wait"] = 3
-			c.TplName = "admin/public/redirect.tpl"
+			c.redirect("/admin/User/edit/uid/" + uid,"未获取到用户信息！",0,3)
 			return
 		}
 	}
@@ -161,13 +137,8 @@ func (c *UserController)Add(){
 		user:=&models.User{User_name:username}
 		myUser,err:=user.GetUserById()
 		if err==nil {
-			c.Data["code"] = 0
-			c.Data["msg"] = "已经存在该用户名的用户，禁止重复！！"
-			c.Data["url"] = "/admin/User/add"
-			c.Data["wait"] = 3
-			c.TplName = "admin/public/redirect.tpl"
+			c.redirect("/admin/User/add","已经存在该用户名的用户，禁止重复！！",0,3)
 			return
-
 		}else{
 			myUser.User_name=username
 			myUser.User_desc=user_desc
@@ -186,17 +157,9 @@ func (c *UserController)Add(){
 			userInfo := &myUser
 			_, err := userInfo.AddUser()
 			if err == nil {
-				c.Data["code"] = 1
-				c.Data["msg"] = "添加成功！"
-				c.Data["url"] = "/admin/User/index"
-				c.Data["wait"] = 1
-				c.TplName = "admin/public/redirect.tpl"
+				c.redirect("/admin/User/index","添加成功！",1,1)
 			} else {
-				c.Data["code"] = 0
-				c.Data["msg"] = "添加失败！"
-				c.Data["url"] = "/admin/User/add"
-				c.Data["wait"] = 3
-				c.TplName = "admin/public/redirect.tpl"
+				c.redirect("/admin/User/add","添加失败！",0,3)
 			}
 			return
 		}
@@ -208,16 +171,9 @@ func (c *UserController)Del(){
 	user:=&models.User{User_id:user_id}
 	_,err:=user.DelUser()
 	if err==nil{
-		c.Data["code"] = 1
-		c.Data["msg"] = "删除成功！"
-		c.Data["url"] = "/admin/User/index"
-		c.Data["wait"] = 1
-		c.TplName = "admin/public/redirect.tpl"
+		c.redirect("/admin/User/index","删除成功！",1,1)
 	}else{
-		c.Data["code"] = 0
-		c.Data["msg"] = "删除失败！"
-		c.Data["url"] = "/admin/User/index"
-		c.Data["wait"] = 3
-		c.TplName = "admin/public/redirect.tpl"
+		c.redirect("/admin/User/index","删除失败！",0,3)
 	}
+	return
 }

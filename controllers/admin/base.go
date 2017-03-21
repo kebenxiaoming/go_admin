@@ -21,6 +21,7 @@ type ContentHeader struct{
 	Menu_id int
 	Menu_name string
 }
+
 //初始化整个的权限和目录
 func (c *BaseController)Prepare(){
 	//赋值用户信息
@@ -53,4 +54,12 @@ func (c *BaseController)Prepare(){
 			c.Data["current_module_id"]=nowMenu.Module_id
 		}
 	}
+}
+
+func (c *BaseController)redirect(url string,msg string,code int,wait int){
+	c.Data["code"] = code
+	c.Data["msg"] = msg
+	c.Data["url"] = url
+	c.Data["wait"] = wait
+	c.TplName = "admin/public/redirect.tpl"
 }
