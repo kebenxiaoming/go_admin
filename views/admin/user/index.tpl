@@ -45,7 +45,7 @@
                         &nbsp;
                         {{if ne $user_info.User_id 1}}
                         <a data-toggle="modal" href="#myModal" title= "删除" >
-                            <i class="icon-remove" goto="{{url "User/edit/uid/"}}{{$user_info.User_id}}" >删除</i></a>
+                            <i class="icon-remove" goto="{{url "User/del/uid/"}}{{$user_info.User_id}}" >删除</i></a>
                        {{end}}
                     </td>
                 </tr>

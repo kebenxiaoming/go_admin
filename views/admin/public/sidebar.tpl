@@ -39,19 +39,19 @@
 				<td width="574">
 					{{if  eq .content_header.Menu_id 11}}
 				</td>
-				<td width="130"><div class="cp_xz"><a href="{:url('Module/add')}">添加模块</a></div></td>
+				<td width="130"><div class="cp_xz"><a href="{{url "Module/add"}}">添加模块</a></div></td>
 				{{else if eq .content_header.Menu_id 2}}
 
 				</td>
-				<td width="130"><div class="cp_xz"><a href="{:url('User/add')}">添加用户</a></div></td>
+				<td width="130"><div class="cp_xz"><a href="{{url "User/add"}}">添加用户</a></div></td>
 				{{else if eq .content_header.Menu_id 14}}
 
 				</td>
-				<td width="130"><div class="cp_xz"><a href="{:url('Menu/add')}">添加菜单</a></div></td>
+				<td width="130"><div class="cp_xz"><a href="{{url "Menu/add"}}">添加菜单</a></div></td>
 				{{else if eq .content_header.Menu_id 7}}
 
 				</td>
-				<td width="130"><div class="cp_xz"><a href="{:url('Group/add')}">添加账号组</a></div></td>
+				<td width="130"><div class="cp_xz"><a href="{{url "Group/add"}}">添加账号组</a></div></td>
 				{{end}}
 			</tr>
 		</table>

@@ -90,4 +90,21 @@ func (user *User) UpdateUser() (User,error){
 	return *user,err
 }
 
+func (user *User) AddUser() (User,error){
+	o := orm.NewOrm()
+	o.Using("default")
+	// read
+	_,err := o.Insert(user)
+	return *user,err
+}
+
+func (user *User) DelUser() (User,error){
+	o := orm.NewOrm()
+	o.Using("default")
+	// read
+	_,err := o.Delete(user)
+	return *user,err
+}
+
+
 
